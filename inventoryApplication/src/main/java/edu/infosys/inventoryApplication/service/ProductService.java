@@ -40,6 +40,7 @@ public class ProductService {
 	public Product setSalesPrice(Product product) {
 		double purchasePrice = product.getPurchasePrice();
 		double salesPrice = purchasePrice + purchasePrice * 0.20;
+		product.setSalesPrice(salesPrice);
 		return product;
 	
 	}

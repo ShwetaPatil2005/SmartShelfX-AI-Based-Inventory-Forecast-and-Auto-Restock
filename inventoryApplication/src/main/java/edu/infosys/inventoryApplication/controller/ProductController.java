@@ -91,6 +91,21 @@ public class ProductController {
 		return productDao.getProductByVendor(id);
 	}
 
+	
+	@GetMapping("/users/role/{role}")
+	public List<String> getUsersByRole(@PathVariable String role) {
+	    // This calls your repository: Select username from inventoryUser where role=?1
+	    return userService.getUserByRole(role); 
+	}
+	
+	@PutMapping("/product/fix-prices")
+	public void fixExistingPrices() {
+	    List<Product> products = productDao.getAllProducts();
+	    for(Product p : products) {
+	        service.setSalesPrice(p); // This now sets the price correctly
+	        productDao.saveProduct(p);
+	    }
+	}
 
 
 }

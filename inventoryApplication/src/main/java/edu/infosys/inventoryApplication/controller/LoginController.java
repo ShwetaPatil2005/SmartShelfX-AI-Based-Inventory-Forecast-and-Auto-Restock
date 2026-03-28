@@ -1,4 +1,6 @@
 package edu.infosys.inventoryApplication.controller;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -83,6 +85,13 @@ public class LoginController {
 	        response.addCookie(cookie);
 	        return ResponseEntity.ok("Logout successful");
 	    }
+	
+	
+	@GetMapping("/vendor-list")
+	public List<String> getVendorList() {
+	    // Calling the repository query: "Select username from inventoryUser where role='Vendor'"
+	    return service.getUserByRole("Vendor"); 
+	}
 	
 	
 

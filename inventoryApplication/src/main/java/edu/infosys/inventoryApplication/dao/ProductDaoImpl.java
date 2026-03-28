@@ -31,7 +31,7 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public Product getProductById(String id) {
 		// TODO Auto-generated method stub
-		return repository.findById(id).get();
+		return repository.findById(id).orElse(null);
 	}
 
 	@Override
