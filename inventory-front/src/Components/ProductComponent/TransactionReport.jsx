@@ -2,6 +2,7 @@ import { useEffect, useState , React} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { findTransactionsByType } from '../../Services/TransactionService';
 import { getRole } from '../../Services/LoginService';
+import '../../DisplayView.css';
 
 const TransactionReport = () => {
 
@@ -35,19 +36,17 @@ const TransactionReport = () => {
 
     return (
 
-        <div className="text-center">
+        <div className="product-list-container">
+            <h2 className="product-list-title">
+                {flag === "IN" ? "Stock Purchase Report" : "Stock Issue Report"}
+            </h2>
             <div>
-                {
-                    flag === "IN" ? <h3 className="text-center"><u>Stock Purchase Report</u></h3> : <h3 className="text-center"><u>Stock Issue Report</u></h3>
-                }
-            </div>
-            <div className="row">
-                <table className="table table-striped table-bordered">
+                <table className="custom-table table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th> Transaction Id</th>
+                            <th>Transaction Id</th>
                             <th>Product Id</th>
-                            <th>Rate </th>
+                            <th>Rate</th>
                             <th>Quantity</th>
                             <th>Transaction Value</th>
                             <th>User Id</th>
@@ -58,21 +57,19 @@ const TransactionReport = () => {
                         {
                             transactions.map((transaction, index) => (
                                 <tr key={transaction.transactionId}>
-                                    <td> {transaction.transactionId} </td>
-                                    <td> {transaction.productId} </td>
-                                    <td> {transaction.rate} </td>
-                                    <td> {transaction.quantity} </td>
-                                    <td> {transaction.transactionValue} </td>
-                                    <td> {transaction.userId}</td>
-                                    <td> {transaction.transactionDate}</td>
+                                    <td>{transaction.transactionId}</td>
+                                    <td>{transaction.productId}</td>
+                                    <td>₹{transaction.rate}</td>
+                                    <td>{transaction.quantity}</td>
+                                    <td>₹{transaction.transactionValue}</td>
+                                    <td>{transaction.userId}</td>
+                                    <td>{transaction.transactionDate}</td>
                                 </tr>
                             ))
                         }
                     </tbody>
                 </table>
-                <div>
-                    <button style={{ marginLeft: "10px" }} onClick={() => returnBack()} className="btn btn-danger">Return</button>
-                </div>
+                <button onClick={() => returnBack()} className="return-btn">Return to Dashboard</button>
             </div>
         </div>
     );

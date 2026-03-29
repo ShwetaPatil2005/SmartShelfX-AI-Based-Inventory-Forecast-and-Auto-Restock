@@ -50,39 +50,28 @@ const returnBack = () => {
 }
 
 return(
-    <div>
-      <br/>
-      <div className = ".container">
-        <div className = "row">
-          <div className = "card col-md-2 offset-md-3 offset-md-3">
-            <div className = "login-box">
-              <h2 className="text-center"><u>SKU Update</u> </h2>
-              <br/>
-              <form>
-                <div className = "form-group">
-                  <label>SKU ID: </label>
-                  <input placeholder="sku Id" name="skuId" className="form-control" value={sku.skuId}/>
-                 
-                </div>
-                <div className = "form-group">
-                  <label>SKU Category: </label>
-                  <input placeholder="Category" name="category" className="form-control" value={sku.category}/>
-                 
-                </div>
-                <div className = "form-group">
-                  <label>SKU Description: </label>
-                  <input placeholder="skuDescription"   name="skuDescription" className="form-control" value={description} onChange={(event)=>setDescription(event.target.value)}/>
-                  {errors.skuDescription && <p style={{ color: "red" }}>{errors.skuDescription}</p>}
-                </div>
-                <div className = "form-group">            
-                  <button className='btn btn-primary' onClick={handleValidation}>Submit</button>
-                  &nbsp; &nbsp;
-                  <button style={{marginLeft: "10px"}} onClick={()=>returnBack()} className="btn btn-success">Return</button>  
-                </div>    
-              </form>
-            </div>
+    <div className="form-background">
+      <div className="form-card">
+        <h2 className="form-title">SKU Update</h2>
+        <form>
+          <div className="form-group">
+            <label>SKU ID</label>
+            <input placeholder="SKU Id" name="skuId" className="form-control" value={sku.skuId} readOnly/>
           </div>
-        </div>
+          <div className="form-group">
+            <label>SKU Category</label>
+            <input placeholder="Category" name="category" className="form-control" value={sku.category} readOnly/>
+          </div>
+          <div className="form-group">
+            <label>SKU Description</label>
+            <input placeholder="Enter new description" name="skuDescription" className="form-control" value={description} onChange={(event)=>setDescription(event.target.value)}/>
+            {errors.skuDescription && <p className="error">{errors.skuDescription}</p>}
+          </div>
+          <div className="form-buttons">
+            <button className="primary-btn" onClick={handleValidation} type="button">Submit</button>
+            <button className="secondary-btn" onClick={()=>returnBack()} type="button">Return</button>
+          </div>
+        </form>
       </div>
     </div>
   );

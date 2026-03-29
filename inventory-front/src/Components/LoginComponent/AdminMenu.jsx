@@ -7,6 +7,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import {logoutUser} from '../../Services/LoginService';
 import {useNavigate} from 'react-router-dom';
+import '../../DisplayView.css';
 
 const AdminMenu = () => {
   let navigate=useNavigate();
@@ -19,32 +20,32 @@ const AdminMenu = () => {
   };
 
   return (
-    <div className=".container">
-     <br/>
-      <div  align="center" style={{backgroundColor:'green'}}>
-      <h1 className = "text-center" style={{color:'burlywood'}}><u><i>Inventory Admin Menu</i></u></h1>
+    <div>
+      <div className="admin-header">
+        <h2>Inventory Management System</h2>
+        <h4>Admin Dashboard</h4>
       </div>
-       <Navbar expand="lg" bg="warning">
+       <Navbar expand="lg" className="admin-navbar">
          <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-           <NavDropdown title="SKU" id="collasible-nav-dropdown"><b>SKU</b>
+           <NavDropdown title="SKU" id="collasible-nav-dropdown">
               <NavDropdown.Item href="/sku-list">SKU List</NavDropdown.Item>
               <NavDropdown.Item href="/sku-entry">SKU Addition</NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Product" id="collasible-nav-dropdown"><b>Product</b>
+            <NavDropdown title="Product" id="collasible-nav-dropdown">
               <NavDropdown.Item href="/product-entry">Product Addition</NavDropdown.Item>
               <NavDropdown.Item href="/product-list">Product List</NavDropdown.Item>
-              <DropdownButton as={ButtonGroup} key='end'id='dropdown-button-drop-end'drop='end'variant="light"title='Product Analysis'>
+              <DropdownButton as={ButtonGroup} key='end' id='dropdown-button-drop-end' drop='end' variant="light" title='Product Analysis'>
                 <Dropdown.Item href="/product-pie">All Products Analysis</Dropdown.Item>
                  <Dropdown.Item href="">Single Product Demand Analysis</Dropdown.Item>
               </DropdownButton>
              </NavDropdown>
-            <NavDropdown title="Transaction Report" id="collasible-nav-dropdown"><b>Transaction Report</b>
+            <NavDropdown title="Transaction Report" id="collasible-nav-dropdown">
               <NavDropdown.Item href="/trans-repo/OUT">Out Transaction Report</NavDropdown.Item>
               <NavDropdown.Item href="/trans-repo/IN">In Transaction Report</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href=""><b>Show User Details</b></Nav.Link>
-            <Nav.Link onClick={handleLogout}><b>Logout</b></Nav.Link>
+            <Nav.Link href="">Show User Details</Nav.Link>
+            <Nav.Link onClick={handleLogout} className="logout-btn">Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

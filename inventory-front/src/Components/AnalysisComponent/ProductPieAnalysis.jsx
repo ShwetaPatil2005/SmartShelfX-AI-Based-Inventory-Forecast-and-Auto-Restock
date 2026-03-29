@@ -50,33 +50,41 @@ const ProductPieAnalysis = () => {
 
 
     return (
-        <div className="p-4 max-w-xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">Product Sale Dashboard</h3>
-            <div align="left">
-                <table className="w-full border mb-6">
-                    <thead>
-                        <tr className="bg-gray-200">
-                            <th className="border px-4 py-2">Product Name</th>
-                            <th className="border px-4 py-2">Sales Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {productSale.map((p, i) => (
-                            <tr key={i} className="text-center">
-                                <td className="border px-4 py-2">{p.productName}</td>
-                                <td className="border px-4 py-2">{Number(p.totalSaleValue).toFixed(2)}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-            <div style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
-                <div style={{ width: "80%", maxWidth: "300px" }}>
-                    <h5>Total Sale per Product</h5>
-                    <Pie data={chartData} />
+        <div className="product-list-container">
+            <h2 className="product-list-title">Product Sale Analysis Dashboard</h2>
+
+            <div style={{maxWidth: '1200px', margin: '0 auto'}}>
+                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', marginBottom: '40px', alignItems: 'start'}}>
+                    <div>
+                        <h3 style={{color: '#2c3e50', fontWeight: '700', fontSize: '18px', marginBottom: '20px'}}>Product Sales Summary</h3>
+                        <table className="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Sales Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {productSale.map((p, i) => (
+                                    <tr key={i}>
+                                        <td>{p.productName}</td>
+                                        <td>₹{Number(p.totalSaleValue).toFixed(2)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style={{background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 8px 25px rgba(0, 0, 0, 0.08)', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                        <h3 style={{color: '#2c3e50', fontWeight: '700', fontSize: '18px', marginBottom: '20px', textAlign: 'center'}}>Sales Distribution</h3>
+                        <div style={{width: '100%', maxWidth: '300px'}}>
+                            <Pie data={chartData} options={{responsive: true, maintainAspectRatio: true}}/>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <button style={{ marginLeft: "10px" }} onClick={() => returnBack()} className="btn btn-success">Return</button>
+
+            <button onClick={() => returnBack()} className="return-btn">Return to Dashboard</button>
         </div>
     );
 

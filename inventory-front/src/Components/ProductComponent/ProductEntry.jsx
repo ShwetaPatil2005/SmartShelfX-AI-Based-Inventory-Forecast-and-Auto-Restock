@@ -194,7 +194,7 @@ const ProductEntry = () => {
 
             <div className="product-card">
 
-                <h2 className="text-center mb-4">New Product Addition</h2>
+                <h2 className="text-center">New Product Addition</h2>
 
                 <form>
 

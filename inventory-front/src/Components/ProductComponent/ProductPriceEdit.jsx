@@ -67,19 +67,43 @@ return(
 
   <div className="form-card">
 
-    <h3 className="form-title">Edit Product Price</h3>
+    <h2 className="form-title">Edit Product Price</h2>
 
-    <div className="product-info">
-
-      <p><strong>Product Id:</strong> {product.productId}</p>
-      <p><strong>SKU:</strong> {product.skuId}</p>
-      <p><strong>Product Name:</strong> {product.productName}</p>
-      <p><strong>Purchase Price:</strong> {product.purchasePrice}</p>
-      <p><strong>Sales Price:</strong> {product.salesPrice}</p>
-      <p><strong>Reorder Level:</strong> {product.reorderLevel}</p>
-      <p><strong>Stock:</strong> {product.stock}</p>
-      <p><strong>Vendor:</strong> {product.vendorId}</p>
-
+    <div style={{background: '#f8fafb', padding: '20px', borderRadius: '8px', marginBottom: '25px', border: '1px solid #e0e6ed'}}>
+      <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px'}}>
+        <div>
+          <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>Product ID</p>
+          <p style={{fontWeight: '600', color: '#2c3e50'}}>{product.productId}</p>
+        </div>
+        <div>
+          <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>SKU ID</p>
+          <p style={{fontWeight: '600', color: '#2c3e50'}}>{product.skuId}</p>
+        </div>
+        <div style={{gridColumn: '1 / -1'}}>
+          <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>Product Name</p>
+          <p style={{fontWeight: '600', color: '#2c3e50'}}>{product.productName}</p>
+        </div>
+        <div>
+          <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>Current Purchase Price</p>
+          <p style={{fontWeight: '600', color: '#2c3e50'}}>₹{product.purchasePrice}</p>
+        </div>
+        <div>
+          <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>Sales Price</p>
+          <p style={{fontWeight: '600', color: '#2c3e50'}}>₹{product.salesPrice}</p>
+        </div>
+        <div>
+          <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>Stock</p>
+          <p style={{fontWeight: '600', color: '#2c3e50'}}>{product.stock}</p>
+        </div>
+        <div>
+          <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>Re-Order Level</p>
+          <p style={{fontWeight: '600', color: '#2c3e50'}}>{product.reorderLevel}</p>
+        </div>
+        <div>
+          <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>Vendor</p>
+          <p style={{fontWeight: '600', color: '#2c3e50'}}>{product.vendorId}</p>
+        </div>
+      </div>
     </div>
 
     <div className="form-group">
@@ -87,24 +111,25 @@ return(
       <label>Enter New Purchase Price</label>
 
       <input
-        placeholder="New Price"
+        placeholder="Enter new price"
         name="newPrice"
         className="form-control"
+        type="number"
         value={newPrice}
         onChange={onChangeHandler}
       />
 
     </div>
 
-    {flag && <p className="success-msg">Product Price Updated...</p>}
+    {flag && <div style={{background: '#d5f4e6', padding: '15px', borderRadius: '8px', marginBottom: '20px', textAlign: 'center', borderLeft: '4px solid #27ae60'}}><p style={{color: '#27ae60', fontWeight: '600', margin: 0}}>Product Price Updated Successfully! ✓</p></div>}
 
     <div className="form-buttons">
 
-      <button className="btn btn-success" onClick={updatePrice}>
+      <button className="primary-btn" onClick={updatePrice} type="button">
         Save
       </button>
 
-      <button className="btn btn-warning" onClick={returnBack}>
+      <button className="secondary-btn" onClick={returnBack} type="button">
         Return
       </button>
 

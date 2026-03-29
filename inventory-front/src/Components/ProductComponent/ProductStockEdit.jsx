@@ -169,95 +169,89 @@ const stockEdit = (event) => {
     };
 
     return (
-  <div>
-    <div className = "col-md-12 text-center" style={{textAlign:"center"}} >
-      {
-        parseInt(flag)===1 ? <h3 className="text-center"><u>Stock Purchase Entry</u></h3>: <h3 className="text-center"><u>Stock Issue Entry</u></h3>
-      }
+  <div className="form-background">
+    <div style={{width: '100%', maxWidth: '600px'}}>
+      <div className="form-card">
+        <h2 className="form-title">
+          {parseInt(flag)===1 ? "Stock Purchase Entry" : "Stock Issue Entry"}
+        </h2>
+
+        <div style={{background: '#f8fafb', padding: '20px', borderRadius: '8px', marginBottom: '25px', border: '1px solid #e0e6ed'}}>
+          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px'}}>
+            <div>
+              <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>Product ID</p>
+              <p style={{fontWeight: '600', color: '#2c3e50'}}>{product.productId}</p>
+            </div>
+            <div>
+              <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>SKU ID</p>
+              <p style={{fontWeight: '600', color: '#2c3e50'}}>{product.skuId}</p>
+            </div>
+            <div style={{gridColumn: '1 / -1'}}>
+              <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>Product Name</p>
+              <p style={{fontWeight: '600', color: '#2c3e50'}}>{product.productName}</p>
+            </div>
+            <div>
+              <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>
+                {parseInt(flag)===1 ? "Purchase Price" : "Sales Price"}
+              </p>
+              <p style={{fontWeight: '600', color: '#2c3e50'}}>
+                ₹{parseInt(flag)===1 ? product.purchasePrice : product.salesPrice}
+              </p>
+            </div>
+            <div>
+              <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>Current Stock</p>
+              <p style={{fontWeight: '600', color: '#2c3e50'}}>{product.stock}</p>
+            </div>
+            <div>
+              <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>Re-Order Level</p>
+              <p style={{fontWeight: '600', color: '#2c3e50'}}>{product.reorderLevel}</p>
+            </div>
+            <div style={{gridColumn: '1 / -1'}}>
+              <p style={{fontSize: '12px', color: '#95a5a6', marginBottom: '4px'}}>Vendor</p>
+              <p style={{fontWeight: '600', color: '#2c3e50'}}>{product.vendorId}</p>
+            </div>
+          </div>
+        </div>
+
+        <form>
+          <div className="form-group">
+            <label>Transaction ID</label>
+            <input name="transactionId" className="form-control" value={newId} readOnly/>
+          </div>
+          <div className="form-group">
+            <label>Transaction Date</label>
+            <input type="date" className="form-control" value={tdate} onChange={(event)=>setTdate(event.target.value)}/>
+          </div>
+          <div className="form-group">
+            <label>
+              {parseInt(flag)===1 ? "Enter Purchased Quantity" : "Enter Issued Quantity"}
+            </label>
+            <input placeholder="Quantity" name="quantity" className="form-control" value={quantity} onChange={(event)=>setQuantity(event.target.value)}/>
+            {errors.quantity && <p className="error">{errors.quantity}</p>}
+          </div>
+
+          {transValue !== null && (
+            <div style={{background: '#ecf0f7', padding: '15px', borderRadius: '8px', marginBottom: '20px', textAlign: 'center', borderLeft: '4px solid #667eea'}}>
+              <p style={{color: '#667eea', fontWeight: '600', margin: 0}}>Transaction Value: ₹{transValue}</p>
+            </div>
+          )}
+
+          {warns !== null && (
+            <div style={{background: '#fadbd8', padding: '15px', borderRadius: '8px', marginBottom: '20px', textAlign: 'center', borderLeft: '4px solid #e74c3c'}}>
+              <p style={{color: '#e74c3c', fontWeight: '600', margin: 0}}>{warns}</p>
+            </div>
+          )}
+
+          <div className="form-buttons">
+            <button className="primary-btn" onClick={handleValidation} type="button">Save</button>
+            <button className="secondary-btn" onClick={clearAll} type="button">Reset</button>
+            <button style={{background: '#e0e6ed', color: '#2c3e50', border: 'none', padding: '12px 20px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', transition: 'all 0.3s ease'}}
+                    onClick={returnBack} type="button">Return</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div className = "card col-md-6 offset-md-3">
-     <div className = "card-body" align="center">
-        <table className="table table-bordered">
-          <tr>
-              <td> Product Id:</td>
-              <td>{product.productId}</td>
-          </tr>
-          <tr>
-              <td> SKU Id: </td>
-              <td>{product.skuId} </td>
-          </tr>
-          <tr>
-              <td> Product Name:</td>
-              <td>{product.productName} </td>
-          </tr>
-          <tr>
-              <td>
-                {
-                  parseInt(flag)===1 ? <>Purchase Price:</>:<>Sales Price:</>
-                }
-               </td>
-               <td>
-                {
-                  parseInt(flag)===1 ? product.purchasePrice:product.salesPrice
-                }
-               </td>
-          </tr>
-          <tr>                      
-              <td> Re Order Level: </td>
-              <td>{product.reorderLevel} </td>
-          </tr>
-          <tr>
-              <td> Stock:</td>
-              <td> {product.stock} </td>
-          </tr>
-          <tr>
-              <td> Vendor:</td>
-              <td>{product.vendorId} </td>
-          </tr>
-      </table>
-     </div>
-    </div>
-    <div className = "card col-md-6 offset-md-3">
-    <div className="card-body" align="center">
-      <form>
-        <div className="row">
-          <div className = "form-group">
-              <label>Transaction Id: </label>
-              <input  name="transactionId" className="form-control" value={newId}/>
-           </div>
-           <div className = "form-group">
-               <label> Select Transaction Date: </label>
-               <input type="date" placeholder="yyyy-mm-dd"  className="form-control" value={tdate} onChange={(event)=>setTdate(event.target.value)}/>  
-               
-           </div>
-           <div className = "form-group">
-                <b>
-                {
-                parseInt(flag)===1 ? <label>Enter Purchased Stock Quantity: </label>: <label>Enter Issued Stock Quantity: </label>
-                }
-                </b>
-              <input placeholder="quantity" name="quantity" className="form-control" value={quantity} onChange={(event)=>setQuantity(event.target.value)}/>
-              {errors.quantity && <p style={{ color: "red" }}>{errors.qty}</p>}
-          </div>  
-          <div>
-               <button className="btn btn-success" onClick={handleValidation}>Save</button>
-               &nbsp;&nbsp;  <button className="btn btn-secondary" onClick={clearAll}>Reset</button>
-               &nbsp;&nbsp; &nbsp;&nbsp;<button className="btn btn-success" onClick={returnBack}>Return</button>                    
-         </div>
-         </div>
-         </form>
-        {transValue !== null && (
-         <div style={{textAlign: "center",}}><b>Transaction Value: ₹{transValue}</b>
-    </div>
-        )}
-     {warns !== null && (
-      <div style={{textAlign: "center",color:"red"}}>
-   <b>{warns}</b>
- </div>
-  )}
-   </div>
- </div>
-</div>
+  </div>
 );
 
 
